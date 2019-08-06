@@ -3,10 +3,14 @@ import { TweenLite, TimelineLite } from "gsap"
 import styles from "./style.module.scss"
 
 const right = () =>
-  `M${2000},-1000  Q${800} -500 ${400} 0 Q${0} ${400} ${400} 500 T ${400} 1000 Q${800} 1500 ${2000} 2000H2000V-1000Z`
+  `M${2000},-1000  Q${800 /* this flips the top axis*/} -500 ${400} 0 Q${
+    0 /*this flips the main axis */
+  } ${400} ${400} 500 T ${400} 1000 Q${
+    0 /*this needs to stay at 0 */
+  } 1500 ${2000} 2000H2000V-1000Z`
 
-const left = (offset, mousePos) =>
-  `M${800},-500 V0 Q${1000} 250 ${800} 500 T ${800} 1000 V1500 H-2000 V-500Z `
+const left = () =>
+  `M${-2000},-1000  Q${-800} -500 ${-400} 0 Q${0} ${400} ${-400} 500 T ${-200} 1000 Q${-400} 1500   -2000 2000Z  `
 
 export default class DynamicSVGSlide extends Component {
   layer1Ref = createRef()
@@ -24,7 +28,7 @@ export default class DynamicSVGSlide extends Component {
 
   componentDidMount() {
     TweenLite.set("#layer1", {
-      x: 780,
+      x: 900,
     })
   }
 
@@ -46,30 +50,21 @@ export default class DynamicSVGSlide extends Component {
 
     TweenLite.to("#layer1", 4, {
       x: -1000,
-      y: 500,
+      y: -500,
     })
   }
-  // `M${2000},-1000  Q${800} -500 ${400} 0 Q${0} ${400} ${400} 500 T ${400} 1000 Q${800} 1500 ${2000} 2000H2000V-1000Z`
   render() {
     return (
       <svg
         onClick={this.transition}
-        viewBox="0 -3000 8000 8000"
+        viewBox="0 -1000 3000 3000"
         preserveAspectRatio="none"
       >
         <path
-          d={`M0 -1000 `}
+          d={right()}
           id="layer1"
           ref={this.layer1Ref}
-          fill="red"
-          stroke="black"
-          strokeMiterlimit="100"
-        />
-        <path
-          d={`M100,900 V980`}
-          id="ldayer1"
-          ref={this.layer1Ref}
-          fill="red"
+          fill="none"
           stroke="black"
           strokeMiterlimit="100"
         />
