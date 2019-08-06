@@ -6,11 +6,15 @@ const right = () =>
   `M${2000},-1000  Q${800 /* this flips the top axis*/} -500 ${400} 0 Q${
     0 /*this flips the main axis */
   } ${400} ${400} 500 T ${400} 1000 Q${
-    0 /*this needs to stay at 0 */
+    0 /*this flips the bottom axis */
   } 1500 ${2000} 2000H2000V-1000Z`
 
 const left = () =>
-  `M${-2000},-1000  Q${-800} -500 ${-400} 0 Q${0} ${400} ${-400} 500 T ${-200} 1000 Q${-400} 1500   -2000 2000Z  `
+  `M${-2000},-1000  Q${800 /* this flips the top axis*/} -500 ${400} 0 Q${
+    0 /*this flips the main axis */
+  } ${400} ${400} 500 T ${400} 1000 Q${
+    0 /*this flips the bottom axis */
+  } 1500 -2000 2000    `
 
 export default class DynamicSVGSlide extends Component {
   layer1Ref = createRef()
@@ -61,10 +65,10 @@ export default class DynamicSVGSlide extends Component {
         preserveAspectRatio="none"
       >
         <path
-          d={right()}
+          d={left()}
           id="layer1"
           ref={this.layer1Ref}
-          fill="none"
+          fill="red"
           stroke="black"
           strokeMiterlimit="100"
         />
