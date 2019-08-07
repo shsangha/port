@@ -36,12 +36,13 @@ export default class DynamicSVGSlide extends Component {
     const tl = new TimelineLite()
 
     const { pageY, pageX } = e
-    const { height, width } = window.screen
-    const top = pageY < height / 2
-    const left = pageX < width / 2
-    const xOffset = this.calculateOffset()
-    const normalizedPageY = (pageY / height) * 1000
+    const { clientHeight, clientWidth } = document.body
+    const top = pageY < clientHeight / 2
+    const left = pageX < clientWidth / 2
+    const normalizedPageY = (pageY / clientHeight) * 1000
     const yOffset = top ? normalizedPageY : 1000 - normalizedPageY
+
+    console.log(clientHeight)
 
     const layer1 = this.layer1Ref.current
 
