@@ -1,0 +1,61 @@
+@import "../../../scss/extends/fullscreen.scss";
+@import "../../../scss//variables/colors.scss";
+
+.cover {
+  @extend %fullScreen;
+  z-index: -1;
+}
+
+.mask,
+.inner,
+.cover {
+  transition: all 1.8s;
+}
+
+.light {
+  background: $color-light-main;
+
+  .mask {
+    stroke: $color-light-main;
+  }
+
+  .inner {
+    stroke: $color-light-accent;
+  }
+
+  &.inverted {
+    background: $color-dark-main;
+
+    .mask {
+      stroke: $color-dark-main;
+    }
+
+    .inner {
+      stroke: $color-dark-accent;
+    }
+  }
+}
+
+.dark {
+  background: $color-dark-main;
+
+  .mask {
+    stroke: $color-dark-main;
+  }
+
+  .inner {
+    stroke: $color-dark-accent;
+  }
+
+  &.inverted {
+    background: $color-light-main;
+
+    .mask {
+      stroke: $color-light-main;
+    }
+
+    .inner {
+      stroke: $color-light-accent;
+    }
+  }
+}
