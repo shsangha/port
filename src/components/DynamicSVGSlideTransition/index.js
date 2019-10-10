@@ -24,14 +24,6 @@ export default class DynamicSVGSlide extends Component {
   layer1Ref = createRef()
   layer2Ref = createRef()
 
-  componentDidMount() {
-    TweenLite.set("#layer1", {
-      attr: {
-        d: setPathData(1, 1, 300),
-      },
-    })
-  }
-
   transition = ({ node, e, exit, entry }) => {
     const tl = new TimelineLite()
 
@@ -42,16 +34,14 @@ export default class DynamicSVGSlide extends Component {
     const normalizedPageY = (pageY / clientHeight) * 1000
     const yOffset = top ? normalizedPageY : 1000 - normalizedPageY
 
-    console.log(clientHeight)
-
-    const layer1 = this.layer1Ref.current
+    const initialX = left
 
     tl.set("#layer1", {
       attr: {
-        //d: right(xOffset, "up"),
+        d: setPathData(top, left, yOffset),
       },
       x: -800,
-    }).to("#layer1", 4, {
+    }).to("#layer1", 1, {
       x: 2000,
       y: 500,
     })
@@ -61,11 +51,11 @@ export default class DynamicSVGSlide extends Component {
       <>
         <TransitionLink
           entry={{
-            delay: 5,
+            delay: 4,
           }}
           exit={{
             trigger: props => this.transition(props),
-            length: 5,
+            length: 2,
           }}
           to="/Page"
         >
@@ -76,16 +66,8 @@ export default class DynamicSVGSlide extends Component {
             d={""}
             id="layer1"
             ref={this.layer1Ref}
-            fill="blue"
-            stroke="black"
-            strokeMiterlimit="100"
-          />
-          <path
-            d={""}
-            id="layer2"
-            ref={this.layer1Ref}
-            fill="red"
-            stroke="black"
+            fill="white"
+            stroke="none"
             strokeMiterlimit="100"
           />
         </svg>
@@ -93,29 +75,3 @@ export default class DynamicSVGSlide extends Component {
     )
   }
 }
-
-/* 
-
-
- the seperated path data
-
-  return left
-    ? `M-2000,-1000 
-       Q${controlPoint1X} -${yPosition}
-       ${half} 0 
-       Q${controlPoint2X} ${yPosition}
-       ${half} 500
-       T ${half} 1000
-       Q${controlPoint2X} ${yPosition + 1000}
-      -2000 2000Z `
-    : `M2000,-1000
-       Q${controlPoint1X} -${yPosition}
-       ${half} 0 
-       Q${controlPoint2X} ${yPosition}
-       ${half} 500 
-       T ${half} ${1000}
-       Q${controlPoint2X} ${yPosition + 1000}
-       2000 2000Z
-       `
-
-       */
