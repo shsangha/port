@@ -37,7 +37,7 @@
     "eslint-config-prettier": "^6.3.0",
     "gatsby-plugin-sass": "^2.1.0",
     "gatsby-plugin-typescript": "^2.1.11",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "pluggable-babel-eslint": "^0.3.0",
     "prettier": "^1.18.2",
     "tslint": "^5.20.0",
